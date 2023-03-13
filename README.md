@@ -2,7 +2,7 @@
 
 This repository contains the script to perform a bulk restore of namespaces using Kasten k10.
 
-The script takes namespaces separated by comma as input parameters and checks if k10 RestorePoint or RestorePointContent exists for the namespace in the Target cluster. If it exists, the script performs a RestoreAction. If it doesn't exist, a warning message is issued and the namespace is skipped. The script also reports the status of the RestoreAction based on the provided timeout parameter.
+The script takes namespaces separated by comma as input parameters and checks if k10 RestorePoint or RestorePointContent exists for the namespace in the Target cluster. If exists, the script performs a RestoreAction. If it doesn't exist, a warning message is issued and the namespace is skipped. The script  reports the status of the RestoreAction based on the provided timeout parameter. Optional storage class parameter can be specified to apply a transform operation during restore. 
 
 
 ## Pre-requisites
@@ -22,7 +22,7 @@ Parameters:
 
 -n (Required) Specifies the namespaces to be restored. Multiple namespaces can be provided separated by comma.
 
--s (Optional) Specifies the name of the storageclass to be used for restore.
+-s (Optional) Specifies the name of the storageclass to be used for restore. If the storage class doesn't exist the script will abort.
 
 -t (Optional) Specifies the timeout value in seconds. The script will check for status of restored namespaces until this timeout is reached. If not specified, the timeout will default to 1 Hr.
 
