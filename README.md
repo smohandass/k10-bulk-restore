@@ -1,6 +1,9 @@
 # Kasten Bulk Restore
 
-This repository contains the script to perform a bulk restore of namespaces using Kasten K10. 
+This repository contains the script to perform a bulk restore of namespaces using Kasten k10.
+
+The script takes namespaces separated by comma as input parameters and checks if k10 RestorePoint or RestorePointContent exists for the namespace in the Target cluster. If it exists, the script performs a RestoreAction. If it doesn't exist, a warning message is issued and the namespace is skipped. The script also reports the status of the RestoreAction based on the provided timeout parameter.
+
 
 ## Pre-requisites
 
@@ -8,7 +11,6 @@ This repository contains the script to perform a bulk restore of namespaces usin
 * The environment running the script is connected to the target cluster where namespaces are to be restored. Run `kubectl config current-context` to verify.
 * RestorePoint/RestorePointContent exists for the namespaces being restored on the target cluster.
 
-Note: If the RestorePoint/RestorePointContent doesn't exist on the target cluster, the script will issue a warning and skip the namespace from the restore.
 
 ## Usage
 
