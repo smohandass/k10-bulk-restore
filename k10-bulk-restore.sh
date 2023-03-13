@@ -163,8 +163,8 @@ for ns in $namespace; do
           else
              print_info "Namespace $ns does not exist on the cluster, but found a RestorePointContent"
              createNamespace 
-	     createRPfromRPC 
-	     createRestoreAction
+             createRPfromRPC 
+             createRestoreAction
           fi
     else
           if [ `kubectl get restorepoint -n $ns --no-headers 2>/dev/null | wc -l ` -eq 0 ]
@@ -175,7 +175,7 @@ for ns in $namespace; do
                 else
                    createRPfromRPC 
                    createRestoreAction
-		fi
+                fi
              else
                    createRestoreAction 
           fi
@@ -218,7 +218,7 @@ timeout=$((timeout + 10))
 done
 
 if [[ ${#restored_namespaces_pending_check[@]} -ne 0 ]]; then
-	
+
    print_info "------------------------------------------------"
    print_heading "The timeout for restore status check has been reached"
 
@@ -255,13 +255,18 @@ then
    usageFunction
 fi
 
-if [[ -z $global_timeout ]]; then
-# Specify the timeout in seconds 
+# Specify the timeout in seconds
 # The script will check for restored namespaces status until this timeout is reached
-printf "\n setting gloabl timeout to 300"
+if [[ -z $global_timeout ]]; then
+        global_timeout=3600
+fi
 
-global_timeout=300
-
+target_cluster_name=`kubectl config current-context`
+if [ -z $target_cluster_name ]; then
+   print_error "Error - Target kubernetes cluster has not been defined"
+   exit 1
+else
+   print_info "Restore will run on kubernetes cluster: $target_cluster_name"
 fi
 
 validateStorageClass
@@ -269,9 +274,7 @@ bulkRestore
 
 # Check the status of the restored namespaces
 if [[ ${#restored_namespaces[@]} -gt 0 ]]; then
-
-	print_info "------------------------------------------------"
-	print_heading "Checking the status of restored namespaces...."
-	checkRestoreStatus
+        print_info "------------------------------------------------"
+        print_heading "Checking the status of restored namespaces...."
+        checkRestoreStatus
 fi
-
