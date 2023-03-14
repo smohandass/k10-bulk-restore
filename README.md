@@ -9,6 +9,7 @@ The script takes namespaces separated by comma as input parameters and checks if
 
 * The environment running the script can execute kubectl commands.
 * The environment running the script is connected to the target cluster where namespaces are to be restored. Run `kubectl config current-context` to verify.
+* The user has permissions to create new namespaces on the target cluster. 
 * RestorePoint/RestorePointContent exists for the namespaces being restored on the target cluster.
 
 
