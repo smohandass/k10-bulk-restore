@@ -18,6 +18,8 @@ If exists, the script performs a RestoreAction. If it doesn't exist, a warning m
 ## Usage
 
 ```
+git clone https://github.com/smohandass/k10-bulk-restore.git
+cd k10-bulk-restore
 ./k10-bulk-restore.sh -n <namespaces_to_restore> [-s storageclass] [-t timeout]
 ```
 
