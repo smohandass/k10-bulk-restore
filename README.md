@@ -6,6 +6,10 @@ The script takes namespaces (separated by comma) as input parameters and checks 
 
 If exists, the script performs a RestoreAction. If it doesn't exist, a warning message is issued and the namespace is skipped. Optional storage class parameter can be specified to apply a transform operation during restore. 
 
+The script uses the following workflow 
+
+<img width="1165" alt="image" src="https://user-images.githubusercontent.com/2148411/225373960-23a96590-d5a5-4b0d-b7a5-1be88c305935.png">
+
 
 ## Pre-requisites
 
